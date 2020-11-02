@@ -1,9 +1,9 @@
 from flask import Flask, render_template, redirect, flash, session
-from authlib.integrations.flask.client import OAuth
+
 import jinja2
 
 app = Flask(__name__)
-oauth = OAuth(app)
+
 
 
 # Normally, if you refer to an undefined variable in a Jinja template,
