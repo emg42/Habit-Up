@@ -1,6 +1,7 @@
 """Models for habit tracker app."""
 
 from flask_sqlalchemy import SQLAlchemy
+
 import datetime
 db = SQLAlchemy()
 
@@ -11,10 +12,31 @@ class User(db.Model):
 
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    fname = db.Column(db.String)
-    lname = db.Column(db.String)
-    email = db.Column(db.String, unique=True)
-    password = db.Column(db.String)
+    fname = db.Column(db.String(30), nullable=False)
+    lname = db.Column(db.String(30), nullable=False)
+    email = db.Column(db.String(30), unique=True)
+    password = db.Column(db.String(30), nullable=False)
+
+    # phone_number = db.Column(db.)
+class collection_user_habit(db.Model):
+    """An intermediate table connecting the users and habits tables"""
+
+    collection_user_habit_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    habit_id = db.Column(db.Integer, db.ForeignKey('habits.habit_id'), nullable=False)
+
+class Habit(db.Model):
+    """A Habit"""
+
+    __tablename__ = 'habits'
+
+    habit_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    timestamp = db.Column(db.datetime, nullable=False)
+    habit_name = db.Column(db.String(50))
+    habit_type = db.Column(db.String(30))
+    frequency = db.Column(db.Integer, default=0)
+    habit_difficulty = db.Column(db.String(30), nullable=False)
+
 
     def __repr__(self):
 
