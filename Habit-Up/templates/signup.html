@@ -1,0 +1,21 @@
+{% block body %}
+    <h1>Habit Up</h1>
+    <form action="post" id="sign-up">
+        <label for="first-name">Your First Name</label>
+        <input type="text" placeholder="Enter your first name.">
+
+        <label for="last-name">Your Last Name</label>
+        <input type="text" placeholder="Enter your last name">
+
+        <label for="email">Email you wish to use for your account </label>
+        <input type="email" >
+
+        <label for="password">Create a password</label>
+        <input type="password" placeholder="At least 8 characters" minlength="8">
+
+        <label for="phone">Your phone number.</label>
+        <input type="tel" placeholder="555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+        required>
+        
+    </form>
+{% endblock %}

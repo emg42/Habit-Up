@@ -12,7 +12,7 @@ app = Flask(__name__)
 # Jinja silently ignores this. This makes debugging difficult, so we'll
 # set an attribute of the Jinja environment that says to make this an
 # error.
-app.jinja_env.undefined = jinja2.StrictUndefined
+app.jinja_env.undefined = StrictUndefined
 
 @app.route("/")
 def index():
