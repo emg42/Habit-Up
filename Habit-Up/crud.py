@@ -1,4 +1,4 @@
-from model import db, User, Habit, connect_to_db
+from model import db, User, Habit, Type, Difficulty, connect_to_db
 
 from datetime import datetime
 
