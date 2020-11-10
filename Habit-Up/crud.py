@@ -34,11 +34,15 @@ def get_user_by_id(user_id):
     return User.query.get(user_id)
 
 
-# TODO Complete create habit function
-def create_habit(timestamp, habit_name, habit_type):
-    habit = Habit(timestamp=timestamp, 
-    habit_name=habit_name, 
-    habit_type=habit_type)
+
+def create_habit(user_id, timestamp, habit_name, habit_type, frequency, habit_difficulty):
+    habit = Habit(
+        user_id=user_id,
+        timestamp=DateTime.now(), 
+        habit_name=habit_name, 
+        habit_type=habit_type,
+        frequency=frequency,
+        habit_difficulty=habit_difficulty)
     
     db.session.add(habit)
     db.session.commit()
@@ -51,12 +55,22 @@ def update_habit():
 def delete_habit():
     pass
     
-
+# TODO
 def create_type(habit_type):
     type = Type(habit_type=habit_type)
     db.session.add(type)
     db.session.commit()
 
+# TODO
+def update_type():
+    pass
+
+
 def create_difficulty(habit_difficulty):
     difficulty = Difficulty(habit_difficulty=habit_difficulty)
     db.session.add(difficulty)
+    db.session.commit()
+
+# TODO
+def update_difficulty():
+    pass

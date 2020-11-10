@@ -20,6 +20,16 @@ def index():
     
     return render_template('signup.html')
 
+@app.route("/signup", [])
+def index():
+    """Signup page"""
+    
+    #TODO get the user id
+    #session['user_id'] = 
+
+    return redirect('/login')
+
+
 app.route("/users")
 def userspage():
     """View all users"""
@@ -31,4 +41,7 @@ app.route("/login")
 def login_page():
     """View login page"""
 
+    #TODO get the user id
+    #session['user_id'] = 
+   
     return render_template('login.html')

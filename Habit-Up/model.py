@@ -11,7 +11,6 @@ class User(db.Model):
 
     __tablename__ = 'users'
 
-
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     fname = db.Column(db.String(30), nullable=False)
     lname = db.Column(db.String(30), nullable=False)
@@ -19,7 +18,7 @@ class User(db.Model):
     password = db.Column(db.String(30), nullable=False)
     phone_number = db.Column(db.String(15))
 
-    
+    habits = db.relationship("Habit")
 
     def __repr__(self):
 
@@ -33,12 +32,17 @@ class Habit(db.Model):
     __tablename__ = 'habits'
 
     habit_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     timestamp = db.Column(db.DateTime, nullable=False)
     habit_name = db.Column(db.String(50))
     habit_type = db.Column(db.String(30), db.ForeignKey('types.habit_type'))
     frequency = db.Column(db.Integer, default=0)
     habit_difficulty = db.Column(db.String(30), db.ForeignKey('difficulties.habit_difficulty'), nullable=False)
 
+    #relationship("Address", backref="user")
+    types = db.relationship("Type")
+    difficulties = db.relationship("Difficulty")    
+    users = db.relationship("User")
     def __repr__(self):
         return f'<Habit habit_id={self.habit_id} timestamp={self.timestamp} habit_name={self.habit_name} habit_type={self.habit_type} frequency={self.frequency} habit_difficulty={self.habit_difficulty}>'
 
@@ -50,6 +54,7 @@ class Type(db.Model):
 
     habit_type = db.Column(db.String(10), primary_key=True)
 
+    habits = db.relationship("Habit")
     def __repr__(self):
         return '<Type habit_type={self.habit_type}>'
     
@@ -60,6 +65,7 @@ class Difficulty(db.Model):
     
     habit_difficulty = db.Column(db.String(10), primary_key=True, nullable=False)
 
+    habits = db.relationship("Habit")
     def __repr__(self):
         return f'<Difficulty habit_difficulty={self.habit_difficulty}>'
 
@@ -82,5 +88,4 @@ if __name__ == '__main__':
     # too annoying; this will tell SQLAlchemy not to print out every
     # query it executes.
 
-    
     connect_to_db(app)
