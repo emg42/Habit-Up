@@ -14,26 +14,70 @@ app = Flask(__name__)
 # error.
 app.jinja_env.undefined = StrictUndefined
 
-
+@app.route('/')
+def index():
+    """View sign up page"""
+    
+    return render_template('signup.html')
 
 @app.route("/signup", methods=['POST'])
-def index():
-    """Signup page"""
+def signup_user():
+    """Sign up a user"""
     
     #TODO get the user id
     #session['user_id'] = 
+    lname = request.form.get('last-name')
+    fname = request.form.get('first-name')
+    email = request.form.get('email')
+    password = request.form.get('password')
+    password2 = request.form.get('password2')
+    phone = request.form.get('phone')
+    
+    # if password = password2:
+    # else:
+    #     alert("This is not a valid password")
+    user = crud.get_user_by_email(email)
 
-    return redirect('/login')
+    """Check to see if user is already in database"""
+    if user:
+        flash("This email already exists. Try again")
+    else:
+        crud.create_user(fname, lnmae, email, password, phone_number)
+        flash("Your account was created successfully")
 
+   
+
+    return redirect('/login-page', email=email, password=password)
+
+app.route("/login-page")
+def show_login():
+    """Show login page"""
+
+    return render_template('login.html')
 
 app.route("/login")
 def login_page():
-    """View login page"""
+    """Login a user"""
 
     #TODO get the user id
     #session['user_id'] = 
-   
-    return render_template('login.html')
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user = crud.check_user_login_info(email, password)
+
+    if "user_id" not in session:
+        session["user_id"] = user.user_id
+    else:
+        active_user = session.get("user_id")
+
+    if user:
+        flash("Successful login")
+    else:
+        flash("Login info incorrect, please try again")
+    
+    
+    return redirect('/habits')
 
 app.route("/habits")
 def show_habits():

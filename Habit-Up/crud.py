@@ -16,7 +16,10 @@ def create_user(fname,lname, email, password, phone_number):
 
     return user
 
+def check_user_login_info(email, password):
+    """check if the users email and password match in the database"""
 
+    return User.query.filter((User.email == email) & (User.password == password)).first()
 
 def get_users():
     """Return all users."""
