@@ -52,12 +52,22 @@ def create_habit(user_id, timestamp, habit_name, habit_type, frequency, habit_di
 
 # TODO
 def update_habit():
+    
     pass
 
 # TODO
 def delete_habit():
-    pass
-    
+    habit = Habit(
+        habit_id=habit_id,
+        user_id=user_id,
+        timestamp=DateTime.now(), 
+        habit_name=habit_name, 
+        habit_type=habit_type,
+        frequency=frequency,
+        habit_difficulty=habit_difficulty)
+    db.session.delete(habit)
+    db.session.commit()
+
 # TODO
 def create_type(habit_type):
     type = Type(habit_type=habit_type)

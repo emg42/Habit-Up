@@ -2,35 +2,35 @@
 
     <h1>Habit Up</h1>
     
-    <form class="flex-column" action="post" id="sign-up">
+    <form class="flex-column" action="/signup" method="POST" id="sign-up">
         <div class="form-group">
             <label for="first-name">Your first name</label>
-            <input class="form-control" type="text" >
+            <input name="first-name" class="form-control" type="text" >
         </div>
         
         <div class="form-group">
             <label for="last-name">Your last name</label>
-            <input class="form-control" type="text">
+            <input name="last-name" class="form-control" type="text">
         </div>
         
         <div class="form-group">
             <label for="email">Your email</label>
-            <input class="form-control" type="email">
+            <input name="email" class="form-control" type="email">
         </div>
         
         <div class="form-group">
             <label for="password">Create a password</label>
-            <input class="form-control" type="password" placeholder="At least 8 characters" minlength="8">
+            <input name="password" class="form-control" type="password" placeholder="At least 8 characters" minlength="8">
         </div>
         
         <div class="form-group">
             <label for="password2">Re-enter your password</label>
-            <input class="form-control" type="password">
+            <input name="password2" class="form-control" type="password">
         </div>
         
         <div class="form-group">
             <label for="phone">Your phone number. For example: 555-555-5555.</label>
-            <input class="form-control" type="tel"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            <input name="phone" class="form-control" type="tel"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             required>
         </div>
         
@@ -39,5 +39,5 @@
         <input type="submit" value="Signup">
         
     </form>
-
+    <a href="/login"><p>If you already have an account Log In here </p></a>
 {% endblock %}
