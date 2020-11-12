@@ -5,6 +5,7 @@ import crud
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
+app.secret_key = 'ABC'
 
 
 
@@ -40,9 +41,10 @@ def signup_user():
     password2 = request.form.get('password2')
     phone_number = request.form.get('phone')
     print("HHHHHHHHHHHHHHHHHIIIIIIIIIIIIIIIIIIIIII" + email)
-    # if password = password2:
-    # else:
-    #     alert("This is not a valid password")
+    if password == password2:
+        flash("Your passwords match!")
+    else:
+        flash("Re-enter your passwords so that they match")
     user = crud.get_user_by_email(email)
 
     """Check to see if user is already in database"""
@@ -67,7 +69,7 @@ def login_page():
     password = request.form.get('password')
 
     user = crud.check_user_login_info(email, password)
-
+    print(user)
     if "user_id" not in session:
         session["user_id"] = user.user_id
     else:
