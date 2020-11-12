@@ -38,7 +38,7 @@ def signup_user():
     email = request.form.get('email')
     password = request.form.get('password')
     password2 = request.form.get('password2')
-    phone = request.form.get('phone')
+    phone_number = request.form.get('phone')
     print("HHHHHHHHHHHHHHHHHIIIIIIIIIIIIIIIIIIIIII" + email)
     # if password = password2:
     # else:
@@ -89,4 +89,5 @@ def show_habits():
 
 if __name__ == '__main__':
     # connect_to_db(app)
+    crud.connect_to_db(app)
     app.run(host='0.0.0.0', debug=True)
