@@ -1,4 +1,4 @@
-from model import db, User, Habit, Type, Difficulty, connect_to_db
+from model import db, User, Habit, connect_to_db
 
 from datetime import datetime
 
@@ -38,14 +38,12 @@ def get_user_by_id(user_id):
 
 
 
-def create_habit(user_id, timestamp, habit_name, habit_type, frequency, habit_difficulty):
+def create_habit(user_id, habit_name, habit_difficulty, habit_type):
     habit = Habit(
         user_id=user_id,
-        timestamp=DateTime.now(), 
-        habit_name=habit_name, 
-        habit_type=habit_type,
-        frequency=frequency,
-        habit_difficulty=habit_difficulty)
+        habit_name=habit_name,
+        habit_difficulty=habit_difficulty, 
+        habit_type=habit_type)
     
     db.session.add(habit)
     db.session.commit()
@@ -74,22 +72,3 @@ def delete_habit():
     db.session.delete(habit)
     db.session.commit()
 
-# TODO
-def create_type(habit_type):
-    type = Type(habit_type=habit_type)
-    db.session.add(type)
-    db.session.commit()
-
-# TODO
-def update_type():
-    pass
-
-
-def create_difficulty(habit_difficulty):
-    difficulty = Difficulty(habit_difficulty=habit_difficulty)
-    db.session.add(difficulty)
-    db.session.commit()
-
-# TODO
-def update_difficulty():
-    pass

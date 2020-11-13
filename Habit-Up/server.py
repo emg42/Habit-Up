@@ -104,12 +104,12 @@ def add_habit():
     print('********************************')
     print(user_id)
     print('********************************')
-    timestamp = DateTime.now()
+    
     habit_name = request.form.get('habit-name')
     habit_difficulty = request.form.get('difficulty')
-    habit_type = request.form.get('category')
+    habit_type = request.form.get('type')
 
-    crud.create_habit(user_id, timestamp, habit_name, habit_difficulty, habit_type )
+    crud.create_habit(user_id, habit_name, habit_difficulty, habit_type )
 
     return redirect('/habits')
 
@@ -117,7 +117,8 @@ def add_habit():
 @app.route("/habits")
 def show_habits():
     """View habits"""
-
+    user_id = session['user_id']
+    
     return render_template('habits.html')
 
 

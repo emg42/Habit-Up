@@ -18,7 +18,7 @@ class User(db.Model):
     password = db.Column(db.String(30), nullable=False)
     phone_number = db.Column(db.String(15))
 
-    #habits = db.relationship("Habit", backref="users")
+   
 
     def __repr__(self):
 
@@ -33,42 +33,42 @@ class Habit(db.Model):
 
     habit_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    timestamp = db.Column(db.DateTime, nullable=False)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     habit_name = db.Column(db.String(50))
-    habit_type = db.Column(db.String(30), db.ForeignKey('types.habit_type'))
+    habit_type = db.Column(db.String(30))
     frequency = db.Column(db.Integer, default=0)
-    habit_difficulty = db.Column(db.String(30), db.ForeignKey('difficulties.habit_difficulty'), nullable=False)
+    habit_difficulty = db.Column(db.String(30), nullable=False)
 
-    #relationship("Address", backref="user")
-    types = db.relationship("Type", backref='habits')
-    difficulties = db.relationship("Difficulty", backref='habits')    
+    
+    # types = db.relationship("Type", backref='habits')
+    # difficulties = db.relationship("Difficulty", backref='habits')    
     user = db.relationship("User", backref="habits")
     def __repr__(self):
         return f'<Habit habit_id={self.habit_id} timestamp={self.timestamp} habit_name={self.habit_name} habit_type={self.habit_type} frequency={self.frequency} habit_difficulty={self.habit_difficulty}>'
 
             
 
-class Type(db.Model):
-    """A Habit Type"""
-    __tablename__ = 'types'
+# class Type(db.Model):
+#     """A Habit Type"""
+#     __tablename__ = 'types'
 
-    habit_type = db.Column(db.String(10), primary_key=True)
+#     habit_type = db.Column(db.String(10), primary_key=True)
 
-    # habits = db.relationship("Habit", backref="types")
-    def __repr__(self):
-        return '<Type habit_type={self.habit_type}>'
+#     # habits = db.relationship("Habit", backref="types")
+#     def __repr__(self):
+#         return '<Type habit_type={self.habit_type}>'
     
    
 
-class Difficulty(db.Model):
-    """A Habit Difficulty"""
-    __tablename__ = 'difficulties'
+# class Difficulty(db.Model):
+#     """A Habit Difficulty"""
+#     __tablename__ = 'difficulties'
     
-    habit_difficulty = db.Column(db.String(10), primary_key=True, nullable=False)
+#     habit_difficulty = db.Column(db.String(10), primary_key=True, nullable=False)
 
-    # habits = db.relationship("Habit", backref="difficulties")
-    def __repr__(self):
-        return f'<Difficulty habit_difficulty={self.habit_difficulty}>'
+#     # habits = db.relationship("Habit", backref="difficulties")
+#     def __repr__(self):
+#         return f'<Difficulty habit_difficulty={self.habit_difficulty}>'
 
    
 
