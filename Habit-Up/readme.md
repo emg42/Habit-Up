@@ -10,11 +10,11 @@ MVP
 3. User can create New habits to track (think about categories, frequencies, specific day/time allotment, etc)
 4. User can delete/update habit
 5. User can view Habit Dashboard
-6. Reminders for habit (using Twilio API to send email or txt notification)
 
 Nice to have
 
-1.  View their daily to-dos based on their habits (maybe integrate to dashboard)
-2.  Expand on having a user profile
+1. Reminders for habit (using Twilio API to send email or txt notification)
+2. View their daily to-dos based on their habits (maybe integrate to dashboard)
+3. Expand on having a user profile
 
-Tech Stack: Python, Flask, SQL Alchemy, PostgreSQL, JavaScript, OAuth 2.0, Google API
+Tech Stack: Python, Flask, SQL Alchemy, PostgreSQL, JavaScript, FakerAPI, Twilio API

@@ -1,5 +1,5 @@
 from flask import (Flask, request, render_template, redirect, flash, session)
-
+from twilio.twiml.messaging_response import MessagingResponse
 # from model import connect_to_db
 import crud
 from jinja2 import StrictUndefined
@@ -19,8 +19,10 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """View sign up page"""
     
-    #TODO create home.html
-    return render_template('base.html')
+   
+    return render_template('homepage.html')
+
+
 
 @app.route('/signup')
 def show_signup():
@@ -40,7 +42,7 @@ def signup_user():
     password = request.form.get('password')
     password2 = request.form.get('password2')
     phone_number = request.form.get('phone')
-    print("HHHHHHHHHHHHHHHHHIIIIIIIIIIIIIIIIIIIIII" + email)
+   
     if password == password2:
         flash("Your passwords match!")
     else:
@@ -55,19 +57,23 @@ def signup_user():
         flash("Your account was created successfully")
 
 
-    return render_template('login.html')
-
-
+    return redirect('/login')
 
 @app.route("/login")
-def login_page():
-    """Login a user"""
+def show_login():
+    """Show login"""
+
+    return render_template('login.html')
+
+@app.route("/login", methods=['POST'])
+def handle_login():
+    """Handle login"""
 
     #TODO get the user id
     #session['user_id'] = 
-    email = request.form.get('email')
-    password = request.form.get('password')
-
+    email = request.args.get('email')
+    password = request.args.get('password')
+    
     user = crud.check_user_login_info(email, password)
     print(user)
     if "user_id" not in session:
@@ -88,6 +94,13 @@ def show_habits():
     """View habits"""
 
     return render_template('habits.html')
+
+@app.route("/edit-habit", methods=['POST'])
+def edit_habit():
+    """Add a habit, edit a habit"""
+
+
+    return render_template('edit-habit.html')
 
 if __name__ == '__main__':
     # connect_to_db(app)

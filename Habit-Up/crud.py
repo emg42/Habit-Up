@@ -50,6 +50,12 @@ def create_habit(user_id, timestamp, habit_name, habit_type, frequency, habit_di
     db.session.add(habit)
     db.session.commit()
 
+
+def get_habits_by_user_id():
+    
+    return Habit.query.get(user_id).all()
+
+
 # TODO
 def update_habit():
     
