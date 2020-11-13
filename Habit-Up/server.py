@@ -71,11 +71,11 @@ def handle_login():
 
     #TODO get the user id
     #session['user_id'] = 
-    email = request.args.get('email')
-    password = request.args.get('password')
+    email = request.form.get('email')
+    password = request.form.get('password')
     
     user = crud.check_user_login_info(email, password)
-    print(user)
+
     if "user_id" not in session:
         session["user_id"] = user.user_id
     else:
@@ -89,18 +89,44 @@ def handle_login():
     
     return redirect('/habits')
 
+@app.route("/add-habit")
+def show_edit_habit():
+    """show edit habit page"""
+
+
+    return render_template('add-habit.html')
+
+
+@app.route("/add-habit", methods=['POST'])
+def add_habit():
+    """Add a habit"""
+    user_id = session.get("user_id")
+    print('********************************')
+    print(user_id)
+    print('********************************')
+    timestamp = DateTime.now()
+    habit_name = request.form.get('habit-name')
+    habit_difficulty = request.form.get('difficulty')
+    habit_type = request.form.get('category')
+
+    crud.create_habit(user_id, timestamp, habit_name, habit_difficulty, habit_type )
+
+    return redirect('/habits')
+
+
 @app.route("/habits")
 def show_habits():
     """View habits"""
 
     return render_template('habits.html')
 
-@app.route("/edit-habit", methods=['POST'])
-def edit_habit():
-    """Add a habit, edit a habit"""
 
+@app.route("/delete-habit", methods=['POST'])
+def delete_habit():   
+    """delete a habit"""
 
-    return render_template('edit-habit.html')
+    
+    return redirect('/habits')
 
 if __name__ == '__main__':
     # connect_to_db(app)
