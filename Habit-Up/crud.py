@@ -50,7 +50,8 @@ def create_habit(user_id, habit_name, habit_difficulty, habit_type):
 
 
 def get_habits_by_user_id(user_id):
-    habits = Habit.query.get(user_id)
+    habits = Habit.query.filter_by(user_id=user_id).all()
+    print(habits)
     return habits
 
 
