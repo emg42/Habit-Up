@@ -119,7 +119,8 @@ def show_habits():
     """View habits"""
     user_id = session['user_id']
     
-    return render_template('habits.html')
+    habits = crud.get_habits_by_user_id(user_id)
+    return render_template('habits.html', habits=habits)
 
 
 @app.route("/delete-habit", methods=['POST'])

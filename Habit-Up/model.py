@@ -18,6 +18,7 @@ class User(db.Model):
     password = db.Column(db.String(30), nullable=False)
     phone_number = db.Column(db.String(15))
 
+    # habit = db.relationship("Habit", "users")
    
 
     def __repr__(self):
@@ -32,10 +33,10 @@ class Habit(db.Model):
     __tablename__ = 'habits'
 
     habit_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-    habit_name = db.Column(db.String(50))
-    habit_type = db.Column(db.String(30))
+    habit_name = db.Column(db.String(50), nullable=False)
+    habit_type = db.Column(db.String(30), nullable=False)
     frequency = db.Column(db.Integer, default=0)
     habit_difficulty = db.Column(db.String(30), nullable=False)
 
@@ -44,7 +45,7 @@ class Habit(db.Model):
     # difficulties = db.relationship("Difficulty", backref='habits')    
     user = db.relationship("User", backref="habits")
     def __repr__(self):
-        return f'<Habit habit_id={self.habit_id} timestamp={self.timestamp} habit_name={self.habit_name} habit_type={self.habit_type} frequency={self.frequency} habit_difficulty={self.habit_difficulty}>'
+        return f'<Habit user_id={self.user_id} habit_id={self.habit_id} timestamp={self.timestamp} habit_name={self.habit_name} habit_type={self.habit_type} frequency={self.frequency} habit_difficulty={self.habit_difficulty}>'
 
             
 
