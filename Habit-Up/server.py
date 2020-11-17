@@ -106,8 +106,10 @@ def add_habit():
     user_id = session.get("user_id")
 
 
-
+    
     habit_name = request.form.get('habit-name')
+    habit_name = habit_name.replace(' ', '_')
+    
     habit_difficulty = request.form.get('difficulty')
     habit_type = request.form.get('type')
 
@@ -123,6 +125,7 @@ def show_habits():
     
     habits = crud.get_habits_by_user_id(user_id)
     
+
     return render_template('habits.html', habits=habits)
 
 
@@ -140,10 +143,19 @@ def show_edit_habit(habit_id):
     user_id = session['user_id']
     
     habit = crud.get_habit_by_habit_id(user_id, habit_id)
-   
-    habit_name = habit.__dict__['habit_name']
 
-  
+    habit_name = habit.__dict__['habit_name']
+    # habit_name = habit_name.replace('_', ' ')
+    # habit_name = habit_name.split('_')
+    # print('SSSSSSSSSSSSSSSSSSSS')
+    # print(type(habit_name))
+    # print(habit_name)
+    # habit_name = ' '.join(habit_name)
+    # print('JJJJJJJJJJJJJJJJJJJJ')
+    # print(habit_name)
+    # print(type(habit_name))
+    # print('*************************')
+    
    
 
     return render_template("edit-habit.html", habit_name=habit_name, habit=habit)  
