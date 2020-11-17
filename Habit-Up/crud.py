@@ -51,12 +51,13 @@ def create_habit(user_id, habit_name, habit_difficulty, habit_type):
 
 def get_habits_by_user_id(user_id):
     habits = Habit.query.filter_by(user_id=user_id).all()
-   
+    print(habits)
     return habits
 
 def get_habit_by_habit_id(user_id, habit_id):
 
-    habit = db.session.query(Habit).filter_by(user_id=user_id, habit_id=habit_id)
+    habit = Habit.query.filter_by(user_id=user_id, habit_id=habit_id).first()
+    print(habit)
     
 
     return habit

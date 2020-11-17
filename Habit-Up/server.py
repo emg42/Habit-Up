@@ -135,12 +135,18 @@ def edit_frequency():
         habit.frequency += 1
     
 @app.route("/edit-habit/<habit_id>")
-def show_edit_habit():
+def show_edit_habit(habit_id):
     """Display edit habit form"""
     user_id = session['user_id']
-    habit_id = request.values.get('habit-id')
-    habit = crud.get_habit_by_habit_id(user_id, int(habit_id))
-    return render_template("edit-habit.html", habit_id=habit)  
+    
+    habit = crud.get_habit_by_habit_id(user_id, habit_id)
+   
+    habit_name = habit.__dict__['habit_name']
+
+  
+   
+
+    return render_template("edit-habit.html", habit_name=habit_name, habit=habit)  
 
 @app.route("/edit-habit/<habit_id>", methods=['PUT'])
 def edit_habit():
