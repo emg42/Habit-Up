@@ -90,8 +90,11 @@ def handle_login():
     return redirect('/habits')
 
 @app.route("/add-habit")
-def show_edit_habit():
-    """show edit habit page"""
+def show_add_habit():
+    """show add habit page"""
+    user_id = session['user_id']
+
+
 
 
     return render_template('add-habit.html')
@@ -102,13 +105,14 @@ def add_habit():
     """Add a habit"""
     user_id = session.get("user_id")
 
-    
+
+
     habit_name = request.form.get('habit-name')
     habit_difficulty = request.form.get('difficulty')
     habit_type = request.form.get('type')
 
     crud.create_habit(user_id, habit_name, habit_difficulty, habit_type )
-
+   
     return redirect('/habits')
 
 
@@ -117,19 +121,53 @@ def show_habits():
     """View habits"""
     user_id = session['user_id']
     
-    habit_list = []
     habits = crud.get_habits_by_user_id(user_id)
-  
     
     return render_template('habits.html', habits=habits)
 
 
-@app.route("/delete-habit", methods=['POST'])
+@app.route("/edit-frequency", methods=['POST'])
+def edit_frequency():
+    """Update frequency"""
+    is_checked = request.form.get('completed-habit').checked
+    habit = get_habit_by_habit_id(habit_id)
+    if is_checked:
+        habit.frequency += 1
+    
+@app.route("/edit-habit/<habit_id>")
+def show_edit_habit():
+    """Display edit habit form"""
+    user_id = session['user_id']
+    habit_id = request.values.get('habit-id')
+    habit = crud.get_habit_by_habit_id(user_id, int(habit_id))
+    return render_template("edit-habit.html", habit_id=habit)  
+
+@app.route("/edit-habit/<habit_id>", methods=['PUT'])
+def edit_habit():
+    """Edit habit"""
+
+    if "habit_id" not in session:
+        session["habit_id"] = habit.habit_id
+    else:
+        active_habit = session.get("habit_id")
+
+    habit_name = request.form.get('habit_name')
+    habit_difficulty = request.form.get('habit-difficulty')
+    habit_type = request.form.get('habit-type')
+
+    return redirect("edit-habit")
+
+
+
+@app.route("/delete-habit/<habit_id>", methods=['POST'])
 def delete_habit():   
     """delete a habit"""
 
     
     return redirect('/habits')
+
+
+
 
 if __name__ == '__main__':
     # connect_to_db(app)

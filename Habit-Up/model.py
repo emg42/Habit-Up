@@ -18,7 +18,6 @@ class User(db.Model):
     password = db.Column(db.String(30), nullable=False)
     phone_number = db.Column(db.String(15))
 
-    # habit = db.relationship("Habit", "users")
    
 
     def __repr__(self):
@@ -39,38 +38,12 @@ class Habit(db.Model):
     habit_type = db.Column(db.String(30), nullable=False)
     frequency = db.Column(db.Integer, default=0)
     habit_difficulty = db.Column(db.String(30), nullable=False)
-
-    
-    # types = db.relationship("Type", backref='habits')
-    # difficulties = db.relationship("Difficulty", backref='habits')    
+   
     user = db.relationship("User", backref="habits")
     def __repr__(self):
         return f'<Habit user_id={self.user_id} habit_id={self.habit_id} timestamp={self.timestamp} habit_name={self.habit_name} habit_type={self.habit_type} frequency={self.frequency} habit_difficulty={self.habit_difficulty}>'
 
             
-
-# class Type(db.Model):
-#     """A Habit Type"""
-#     __tablename__ = 'types'
-
-#     habit_type = db.Column(db.String(10), primary_key=True)
-
-#     # habits = db.relationship("Habit", backref="types")
-#     def __repr__(self):
-#         return '<Type habit_type={self.habit_type}>'
-    
-   
-
-# class Difficulty(db.Model):
-#     """A Habit Difficulty"""
-#     __tablename__ = 'difficulties'
-    
-#     habit_difficulty = db.Column(db.String(10), primary_key=True, nullable=False)
-
-#     # habits = db.relationship("Habit", backref="difficulties")
-#     def __repr__(self):
-#         return f'<Difficulty habit_difficulty={self.habit_difficulty}>'
-
    
 
 def connect_to_db(flask_app, db_uri='postgresql:///habitupdb', echo=True):
