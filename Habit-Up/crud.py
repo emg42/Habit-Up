@@ -54,33 +54,24 @@ def get_habits_by_user_id(user_id):
     print(habits)
     return habits
 
-def get_habit_by_habit_id(user_id, habit_id):
+def get_habit_by_habit_id(habit_id):
 
-    habit = Habit.query.filter_by(user_id=user_id, habit_id=habit_id).first()
+    habit = Habit.query.get(habit_id)
     print(habit)
     
 
     return habit
 
 def update_habit(habit_id, user_id, habit_name, habit_difficulty, habit_type):
-    habit = Habit(
-        user_id=user_id,
-        habit_name=habit_name,
-        habit_difficulty=habit_difficulty, 
-        habit_type=habit_type)
-    
+    habit = get_habit_by_habit_id(habit_id)
+    habit.habit_name = habit_name
+    habit.habit_difficulty = habit_difficulty
+    habit.habit_type = habit_type
     db.session.add(habit)
     db.session.commit()
 
-def delete_habit():
-    habit = Habit(
-        habit_id=habit_id,
-        user_id=user_id,
-        timestamp=DateTime.now(), 
-        habit_name=habit_name, 
-        habit_type=habit_type,
-        frequency=frequency,
-        habit_difficulty=habit_difficulty)
-    db.session.delete(habit)
+def delete_habit(user_id, habit_id):
+    Habit.query.filter_by(user_id=user_id, habit_id=habit_id).first().delete()
+    # db.session.delete(habit)
     db.session.commit()
 
