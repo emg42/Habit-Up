@@ -70,8 +70,8 @@ def update_habit(habit_id, user_id, habit_name, habit_difficulty, habit_type):
     db.session.add(habit)
     db.session.commit()
 
-def delete_habit(user_id, habit_id):
-    Habit.query.filter_by(user_id=user_id, habit_id=habit_id).first().delete()
-    # db.session.delete(habit)
+def delete_habit(habit_id):
+    habit = Habit.query.get(habit_id)
+    db.session.delete(habit)
     db.session.commit()
 

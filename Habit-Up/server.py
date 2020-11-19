@@ -65,12 +65,17 @@ def show_login():
 
     return render_template('login.html')
 
+# @app.route("/logout", methods='POST')
+# def logout():
+#     """logout user"""
+#     session.pop('user_id', None)
+
+#     return redirect('/')
+
 @app.route("/login", methods=['POST'])
 def handle_login():
     """Handle login"""
 
-    #TODO get the user id
-    #session['user_id'] = 
     email = request.form.get('email')
     password = request.form.get('password')
     
@@ -94,9 +99,6 @@ def show_add_habit():
     """show add habit page"""
     user_id = session['user_id']
 
-
-
-
     return render_template('add-habit.html')
 
 
@@ -105,10 +107,7 @@ def add_habit():
     """Add a habit"""
     user_id = session.get("user_id")
 
-
-    
     habit_name = request.form.get('habit-name')
-    
     
     habit_difficulty = request.form.get('difficulty')
     habit_type = request.form.get('type')
@@ -122,7 +121,8 @@ def add_habit():
 def show_habits():
     """View habits"""
     user_id = session['user_id']
-    
+    print('UUUUUUUUUUUUUUUUUUUUUU')
+    print(user_id)
     habits = crud.get_habits_by_user_id(user_id)
     print('******************')
     print(habits)
@@ -142,14 +142,7 @@ def show_edit_habit(habit_id):
     habit = crud.get_habit_by_habit_id(habit_id)
 
     habit_name = habit.__dict__['habit_name']
-    # habit_id = habit.__dict__['habit_id']
-  
-    # if "habit_id" not in session:
-    #     session["habit_id"] = habit.habit_id
-    # else:
-    #     active_habit = session.get("habit_id")
-    # print('*************************************')
-    # print(habit_id)
+
     return render_template("edit-habit.html", habit_name=habit_name, habit=habit)  
 
 @app.route("/edit-habit/<habit_id>", methods=['POST'])
@@ -159,12 +152,6 @@ def edit_habit(habit_id):
     user_id = session['user_id']
     # habit_id = session['habit_id']
     habit_name = request.form.get('habit-name')
-    
-    # habit_id = request.args.get('habit_id')
-    # habit_id = request.value.get('habit-id')
-    # print('************************************')
-    # print(habit_id)
-
     
     habit_difficulty = request.form.get('difficulty')
     habit_type = request.form.get('type')
@@ -178,13 +165,10 @@ def edit_habit(habit_id):
 @app.route("/delete-habit/<habit_id>", methods=['POST'])
 def delete_habit(habit_id):   
     """delete a habit"""
-    user_id = session['user_id']
-    print('DDDDDDDDDDDDDDDDDDDDDDDD')
-    print(crud.get_habits_by_user_id)
+   
     
-    crud.delete_habit(user_id, habit_id)
-    print('DDDDDDDDDDDDDDDDDDDDDDDD')
-    print(crud.get_habits_by_user_id)
+    crud.delete_habit(habit_id)
+   
     return redirect('/habits')
 
 @app.route("/edit-frequency", methods=['POST'])

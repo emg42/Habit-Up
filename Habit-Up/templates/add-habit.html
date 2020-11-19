@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block body %}
+  <h1>Add Habit</h1>
+
+  <form action="/add-habit" method="post">
+      <label for="habit-name"></label>
+      <input name="habit-name" type="text" placeholder="Enter your habit description" value="">
+
+      <label for="difficulty">Habit Difficulty</label>
+      <select name="difficulty" for="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+      </select>
+
+      <label for="type">Habit Category</label>
+      <select name="type" id="">
+          <option value="work">Work</option>
+          <option value="chores">Chores</option>
+          <option value="school">School</option>
+          <option value="health">Health & Wellness</option>
+          <option value="creativity">Creativity</option>
+          <option value="exercise">Exercise</option>
+      </select>
+      <a href="/habits"><button type="submit">Add Habit</button></a>
+      
+  </form>
+
+
+{% endblock %}
