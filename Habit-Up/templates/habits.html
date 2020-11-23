@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block body %}
-<form id='logout-btn' action="/", method='post'>
-    <button>Logout</button>
+<form id='logout-btn' action="/logout" method='post'>
+    <button type="submit">Logout</button>
 </form>
 <h1>Your Habits</h1>
 <div>
@@ -15,8 +15,11 @@
         {% for habit in habits %}
         <li>
             
-            <div>{{ habit.habit_name }}</div>
-            <form action="/edit-frequency" method="post"><input name="completed-habit" type="checkbox"></form>
+            
+            <form id="check-off-form" >
+                <div id="habit-desc">{{ habit.habit_name }}</div>
+                <input name="habit-checkbox" type="checkbox" id="complete-habit">
+            </form>
             
             
             <a href="/edit-habit/{{ habit.habit_id }}">

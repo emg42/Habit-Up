@@ -65,12 +65,12 @@ def show_login():
 
     return render_template('login.html')
 
-# @app.route("/logout", methods='POST')
-# def logout():
-#     """logout user"""
-#     session.pop('user_id', None)
+@app.route("/logout", methods=['POST'])
+def logout():
+    """logout user"""
+    session.pop('user_id', None)
 
-#     return redirect('/')
+    return redirect('/')
 
 @app.route("/login", methods=['POST'])
 def handle_login():
