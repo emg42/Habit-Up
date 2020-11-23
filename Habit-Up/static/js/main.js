@@ -7,9 +7,13 @@
 $("input:checkbox").change(function () {
   if ($(this).is(":checked")) {
     alert("checked");
-  }
+    $("#habit-desc").wrap("<s>");
+  } else {
+    $(this).not(":checked");
+    alert("unchecked");
 
-  $("#habit-desc").wrap("<strike>");
+    $("#habit-desc").unwrap();
+  }
 });
 
 // $("#input:checkbox").toggle(
