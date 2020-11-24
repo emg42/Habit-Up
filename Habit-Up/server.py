@@ -1,4 +1,4 @@
-from flask import (Flask, request, render_template, redirect, flash, session)
+from flask import (Flask, request, render_template, redirect, flash, session, jsonify)
 from twilio.twiml.messaging_response import MessagingResponse
 # from model import connect_to_db
 import crud
@@ -117,6 +117,25 @@ def add_habit():
    
     return redirect('/habits')
 
+@app.route("/start-day")
+def change_is_checked():
+    """Change is_checked to False for the start of a new day """
+    user_id = session['user_id']
+    # print('77777777777777')
+    # print(user_id)
+    
+    habits = crud.get_habits_by_user_id(user_id)
+    for habit in habits:
+        crud.start_day(habit.habit_id)
+
+    return redirect("/habits")
+
+#habit_id = request.form.get('selected')
+#print('***********',habit_id,'**************')
+    
+ #   crud.start_day(habit_id)
+
+    
 
 @app.route("/habits")
 def show_habits():
@@ -125,8 +144,6 @@ def show_habits():
  
     habits = crud.get_habits_by_user_id(user_id)
     
-    print('*****************************')
-    print(habits)
     # check = crud.check_habit(habit_id)
 
     return render_template('habits.html', habits=habits)
@@ -187,14 +204,13 @@ def delete_habit(habit_id):
    
     return redirect('/habits')
 
-@app.route("/edit-frequency", methods=['POST'])
-def edit_frequency():
-    """Update frequency"""
-    is_checked = request.form.get('completed-habit').checked
-    habit = get_habit_by_habit_id(habit_id)
-    if is_checked:
-        habit.frequency += 1
 
+@app.route("/OUR_ROUTE")
+def stuff():
+
+    stuff = session["user_id"]
+    print('**************99999999999')
+    return jsonify(stuff)
 
 if __name__ == '__main__':
     # connect_to_db(app)

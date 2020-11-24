@@ -79,11 +79,29 @@ def delete_habit(habit_id):
 def check_habit(habit_id):
     # habit = get_habit_by_habit_id(habit_id)
     habit = Habit.query.get(habit_id)
-    print('******************************')
-    print(habit)
-    print(habit_id)
+
     habit.is_checked = not habit.is_checked
+    
     db.session.add(habit)
     db.session.commit()
 
     return habit
+
+def start_day(habit_id):
+    habit = Habit.query.get(habit_id)
+       
+    habit.is_checked = False
+    db.session.add(habit)
+    db.session.commit()
+
+    
+
+  
+
+# def check_if_midnight(habits):
+#    now = datetime.now()
+#    if now == now.replace( hour=0, minute=0):
+       
+#        for habit in habits:
+#             habits.is_checked = False
+#    return now

@@ -1,4 +1,8 @@
-$("#checked-habit").click(function () {});
+// Check on the front end whether or not habit.is_checked
+// is true or false
+
+// completed is true
+// completed is false
 
 // function toggle_check() {
 //   if (check == "on") {
@@ -37,16 +41,16 @@ $("#checked-habit").click(function () {});
 //   });
 // });
 
-let now = moment();
+// let now = moment();
 
-var midnight = "0:00:00";
-// var now = null;
-var isNow = "16:52:23";
-function checkTime() {
-  var now = moment().format("H:mm:ss");
-  if (now === midnight) {
-    $("input:checkbox").attr("checked", false);
-  }
-}
+// var midnight = "0:00:00";
+// // var now = null;
+// var isNow = "10:59:15";
+// function checkTime() {
+//   var now = moment().format("H:mm:ss");
+//   if (now === midnight) {
+//     $("input:submit").attr("value", );
+//   }
+// }
 
-setInterval(checkTime(), 1000);
+// setInterval(checkTime(), 1000);

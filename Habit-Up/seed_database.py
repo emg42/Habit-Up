@@ -30,6 +30,9 @@ for user in user_data:
     users_in_db.append(db_user)
 
 habits_in_db = []
+habit_names_list = ["eat 3 healthy meals a day", "read 30 minutes a day", "meditate 15 minutes", "work out for 30 minutes", "draw for 15 minutes a day"]
+habit_difficulties = ["Easy", "Medium", "Hard"]
+habit_types = ["Work", "Exercise", "Health & Wellness", "School", "Chores", "Creativity", "General Self Improvement"]
 
 for user in users_in_db:
     user_id = user[user_id]
@@ -42,7 +45,6 @@ for user in users_in_db:
     db_habit = crud.create_habit(user_id, timestamp, habit_name,)
     habits_in_db.append(db_habit)
 
-habit_difficulties = ["Easy", "Medium", "Hard"]
-habit_types = ["Work", "Exercise", "Health & Wellness", "School", "Chores", "Creativity", "General Self Improvement"]
+
 
 

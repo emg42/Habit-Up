@@ -3,14 +3,20 @@
 <form id='logout-btn' action="/logout" method='post'>
     <button type="submit">Logout</button>
 </form>
-<h1>Your Habits</h1>
+
+<h2>Your Habits</h1>
 <div>
     <a href="/add-habit">
         <button>Add Habit</button>
+
     </a>
 </div>
 
 <div>
+    
+    <form action="/start-day" methods="get">    
+        <input type="submit" value="Start a new day!">
+    </form>
     <ul>
         {% for habit in habits %}
         <li>
@@ -20,7 +26,7 @@
                 
                 
                 {% if habit.is_checked == False %}
-                    <input type="submit" name="completed-habit" value="Do my habit!">
+                    <input id type="submit" name="completed-habit" value="Do my habit!">
                     <div  id="habit-desc-{{ habit.habit_name }}"> {{habit.habit_name}} </div>
                     
                 {% else %}
@@ -53,5 +59,6 @@
         {% endfor %}
     </ul>
 </div>
-
+<!-- Example in case I want to use AJAX -->
+<!-- <script src="/static/js/habits.js"></script> -->
 {% endblock %}
