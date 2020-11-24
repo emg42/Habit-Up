@@ -3,10 +3,11 @@ from twilio.twiml.messaging_response import MessagingResponse
 # from model import connect_to_db
 import crud
 from jinja2 import StrictUndefined
+from flask_moment import Moment
 
 app = Flask(__name__)
 app.secret_key = 'ABC'
-
+moment = Moment(app)
 
 
 # Normally, if you refer to an undefined variable in a Jinja template,
@@ -121,14 +122,29 @@ def add_habit():
 def show_habits():
     """View habits"""
     user_id = session['user_id']
-    print('UUUUUUUUUUUUUUUUUUUUUU')
-    print(user_id)
+ 
     habits = crud.get_habits_by_user_id(user_id)
-    print('******************')
+    
+    print('*****************************')
     print(habits)
-    print(user_id)
+    # check = crud.check_habit(habit_id)
 
     return render_template('habits.html', habits=habits)
+
+@app.route("/habits/<habit_id>", methods=['POST'])
+def check_habit_id(habit_id):
+    # habit_id = request.args.get(habit_id)
+    is_habit_checked = request.form.get('completed-habit')
+
+    print('?????????????????????????????')
+    print(is_habit_checked)
+    
+    print("habit_id",habit_id,"***************")
+    crud.check_habit(habit_id)
+
+    return redirect('/habits')
+
+
 
     
 @app.route("/edit-habit/<habit_id>")

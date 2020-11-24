@@ -47,10 +47,11 @@ def create_habit(user_id, habit_name, habit_difficulty, habit_type):
     
     db.session.add(habit)
     db.session.commit()
-
+    return habit
 
 def get_habits_by_user_id(user_id):
-    habits = Habit.query.filter_by(user_id=user_id).all()
+    habits = Habit.query.filter_by(user_id=user_id).order_by(Habit.habit_id.asc()).all()
+    
     print(habits)
     return habits
 
@@ -75,3 +76,14 @@ def delete_habit(habit_id):
     db.session.delete(habit)
     db.session.commit()
 
+def check_habit(habit_id):
+    # habit = get_habit_by_habit_id(habit_id)
+    habit = Habit.query.get(habit_id)
+    print('******************************')
+    print(habit)
+    print(habit_id)
+    habit.is_checked = not habit.is_checked
+    db.session.add(habit)
+    db.session.commit()
+
+    return habit

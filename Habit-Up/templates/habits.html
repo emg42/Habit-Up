@@ -16,11 +16,20 @@
         <li>
             
             
-            <form id="check-off-form" >
-                <div id="habit-desc">{{ habit.habit_name }}</div>
-                <input name="habit-checkbox" type="checkbox" id="complete-habit">
+            <form name="completed-habit" id="check-off-form" action="/habits/{{habit.habit_id}}" method="post">
+                
+                
+                {% if habit.is_checked == False %}
+                    <input type="submit" name="completed-habit" value="Do my habit!">
+                    <div  id="habit-desc-{{ habit.habit_name }}"> {{habit.habit_name}} </div>
+                    
+                {% else %}
+                    <input type="submit" name="completed-habit" value="Undo my habit">
+                    <s><div  id="habit-desc-{{ habit.habit_name }}">{{ habit.habit_name }}</div></s>
+                    
+                {% endif %}
             </form>
-            
+
             
             <a href="/edit-habit/{{ habit.habit_id }}">
                

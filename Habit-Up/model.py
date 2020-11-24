@@ -38,10 +38,11 @@ class Habit(db.Model):
     habit_type = db.Column(db.String(30), nullable=False)
     frequency = db.Column(db.Integer, default=0)
     habit_difficulty = db.Column(db.String(30), nullable=False)
+    is_checked = db.Column(db.Boolean, default=False)
    
     user = db.relationship("User", backref="habits")
     def __repr__(self):
-        return f'<Habit user_id={self.user_id} habit_id={self.habit_id} timestamp={self.timestamp} habit_name={self.habit_name} habit_type={self.habit_type} frequency={self.frequency} habit_difficulty={self.habit_difficulty}>'
+        return f'<Habit user_id={self.user_id} habit_id={self.habit_id} timestamp={self.timestamp} habit_name={self.habit_name} habit_type={self.habit_type} frequency={self.frequency} habit_difficulty={self.habit_difficulty} is_checked={self.is_checked}>'
 
             
    
