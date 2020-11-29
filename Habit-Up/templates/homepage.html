@@ -1,20 +1,22 @@
-{% block title %}
-<title>Homepage</title>
-{% endblock %}
+{% extends 'base.html' %}
 
-{% block body %}
 
-<p>
-    <a href="signup">
-        <button type="submit">Signup</button>
-    </a>
-</p>
-<p>
-    <a href="login">
-        <button type="submit">Login</button>
-    </a>
-</p>
 
-  
+    {% block body %}
+        <nav class="navbar">
+            <h1>Habit Up</h1>
+            
+        </nav>
+        <p>
+            <a href="signup">
+                <button type="submit">Signup</button>
+            </a>
+        </p>
+        <p>
+            <a href="login">
+                <button type="submit">Login</button>
+            </a>
+        </p>
+    
 
 {% endblock %}

@@ -1,63 +1,80 @@
 {% extends 'base.html' %}
 {% block body %}
-<form id='logout-btn' action="/logout" method='post'>
-    <button type="submit">Logout</button>
-</form>
-
-<h2>Your Habits</h1>
-<div>
-    <a href="/add-habit">
-        <button>Add Habit</button>
-
-    </a>
-</div>
-
-<div>
-    
-    <form action="/start-day" methods="get">    
-        <input type="submit" value="Start a new day!">
-    </form>
-    <ul>
-        {% for habit in habits %}
-        <li>
+<div class="container wrapper">
+    <nav class="navbar">
+        <h1>Habit Up</h1>
+        <form id='logout-btn' action="/logout" method='post'>
+            <button type="submit">Logout</button>
+        </form>
+    </nav>
+    <div class="container habits-wrapper">
+        <div class="row">
+            <div class="d-inline-flex .flex-row text-center mx-auto">
+                    <h3>Add a habit</h3> 
             
+                    <a href="/add-habit">
+                        <button>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                        </button>
+                    </a>
+                
+
+            </div>
+        </div>
+            <div class="row">
+                <h2 class="text-center mx-auto">Your Habits</h2>
+            </div>
             
-            <form name="completed-habit" id="check-off-form" action="/habits/{{habit.habit_id}}" method="post">
-                
-                
-                {% if habit.is_checked == False %}
-                    <input id type="submit" name="completed-habit" value="Do my habit!">
-                    <div  id="habit-desc-{{ habit.habit_name }}"> {{habit.habit_name}} </div>
+
+            <div >
+                <div class="mx-auto text-center">
+                    <form action="/start-day" methods="get">    
+                        <input type="submit" value="Start a new day!">
+                    </form>
+                </div>
+                <div class="habit-container container-fluid mx-auto">
+                    <ul >
+                        {% for habit in habits %}
+                        
+                        <li> 
+                            
+                            <form name="completed-habit" id="check-off-form" action="/habits/{{habit.habit_id}}" method="post">
+                                
+                                {% if habit.is_checked == False %}
+                                    <input id type="submit" name="completed-habit" value="Do my habit!">
+                                    <div  id="habit-desc-{{ habit.habit_name }}"> {{habit.habit_name}} </div>
+                                    
+                                {% else %}
+                                    <input type="submit" name="completed-habit" value="Undo my habit">
+                                    <s><div  id="habit-desc-{{ habit.habit_name }}">{{ habit.habit_name }}</div></s>  
+                                {% endif %}
+                            </form>
+                            </div>
                     
-                {% else %}
-                    <input type="submit" name="completed-habit" value="Undo my habit">
-                    <s><div  id="habit-desc-{{ habit.habit_name }}">{{ habit.habit_name }}</div></s>
-                    
-                {% endif %}
-            </form>
+                            <a href="/edit-habit/{{ habit.habit_id }}">
+                                
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots-vertical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                </svg>
+                            </a>
 
-            
-            <a href="/edit-habit/{{ habit.habit_id }}">
-               
-                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots-vertical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                </svg>
-            </a>
-            <form id="delete-habit" action="/delete-habit/{{ habit.habit_id }}" method="post">
-                
-                    <button type=>
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                        </svg>
-                    </button>
+                            <form id="delete-habit" action="/delete-habit/{{ habit.habit_id }}" method="post">
+                                <button type=>
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                    </svg>
+                                </button>
+                            </form>  
+                        </li>
+                        {% endfor %}
+                    </ul>
+            </div>
 
-            </form>
-
-            
-        </li>
-        {% endfor %}
-    </ul>
+        </div>
+    </div>
 </div>
 <!-- Example in case I want to use AJAX -->
 <!-- <script src="/static/js/habits.js"></script> -->

@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="static/css/styles.css">
     {% block title %}
     <title>Document</title>
     {% endblock %}
@@ -13,11 +15,8 @@
 
 </head>
 <body>
-    <div class="container wrapper">
-        <nav>
-            <h1>Habit Up</h1>
-            
-        </nav>
+    
+        
         <!-- Show flashed messages -->
         {% with messages = get_flashed_messages() %}
             {% for message in messages %}
@@ -30,7 +29,7 @@
             BODY OF PAGE GOES HERE VIA INHERITANCE
         {% endblock %}
       
-      </div>
+      
     <script
         src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="

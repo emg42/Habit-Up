@@ -1,6 +1,6 @@
 from flask import (Flask, request, render_template, redirect, flash, session, jsonify)
 from twilio.twiml.messaging_response import MessagingResponse
-# from model import connect_to_db
+
 import crud
 from jinja2 import StrictUndefined
 from flask_moment import Moment
@@ -20,7 +20,6 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """View sign up page"""
     
-   
     return render_template('homepage.html')
 
 
@@ -35,8 +34,6 @@ def show_signup():
 def signup_user():
     """Sign up a user"""
     
-    #TODO get the user id
-    #session['user_id'] = 
     lname = request.form.get('last-name')
     fname = request.form.get('first-name')
     email = request.form.get('email')
@@ -121,21 +118,12 @@ def add_habit():
 def change_is_checked():
     """Change is_checked to False for the start of a new day """
     user_id = session['user_id']
-    # print('77777777777777')
-    # print(user_id)
     
     habits = crud.get_habits_by_user_id(user_id)
     for habit in habits:
         crud.start_day(habit.habit_id)
 
-    return redirect("/habits")
-
-#habit_id = request.form.get('selected')
-#print('***********',habit_id,'**************')
-    
- #   crud.start_day(habit_id)
-
-    
+    return redirect("/habits")   
 
 @app.route("/habits")
 def show_habits():
@@ -150,20 +138,13 @@ def show_habits():
 
 @app.route("/habits/<habit_id>", methods=['POST'])
 def check_habit_id(habit_id):
-    # habit_id = request.args.get(habit_id)
-    is_habit_checked = request.form.get('completed-habit')
-
-    print('?????????????????????????????')
-    print(is_habit_checked)
     
-    print("habit_id",habit_id,"***************")
+    is_habit_checked = request.form.get('completed-habit')
+    
     crud.check_habit(habit_id)
 
     return redirect('/habits')
-
-
-
-    
+ 
 @app.route("/edit-habit/<habit_id>")
 def show_edit_habit(habit_id):
     """Display edit habit form"""
@@ -183,7 +164,6 @@ def edit_habit(habit_id):
     """Edit habit"""
 
     user_id = session['user_id']
-    # habit_id = session['habit_id']
     habit_name = request.form.get('habit-name')
     
     habit_difficulty = request.form.get('difficulty')
@@ -198,8 +178,6 @@ def edit_habit(habit_id):
 @app.route("/delete-habit/<habit_id>", methods=['POST'])
 def delete_habit(habit_id):   
     """delete a habit"""
-   
-    
     crud.delete_habit(habit_id)
    
     return redirect('/habits')
@@ -209,10 +187,10 @@ def delete_habit(habit_id):
 def stuff():
 
     stuff = session["user_id"]
-    print('**************99999999999')
+    
     return jsonify(stuff)
 
 if __name__ == '__main__':
-    # connect_to_db(app)
+   
     crud.connect_to_db(app)
     app.run(host='0.0.0.0', debug=True)

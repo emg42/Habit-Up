@@ -1,6 +1,29 @@
 /* This is where I will put my css that is not bootstrap */
 
+body {
+  background-image: url("../images/purple-leaf.jpg");
+  width: 100%;
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+ul {
+  list-style-type: none;
+}
+button {
+  background-color: rgb(4, 71, 147);
+  color: white;
+}
+.navbar {
+  background-color: rgb(42, 77, 107);
+  width: 100%;
+}
+
 .wrapper {
-  /* background-image: url("../images/purple-leaf.jpg"); */
-  color: purple;
+  width: 100%;
+}
+.habits-wrapper {
+  /* color: rgb(4, 71, 147); */
+  color: white;
+  background-color: rgb(180, 183, 186, 0.9);
 }

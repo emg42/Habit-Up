@@ -52,15 +52,14 @@ def create_habit(user_id, habit_name, habit_difficulty, habit_type):
 def get_habits_by_user_id(user_id):
     habits = Habit.query.filter_by(user_id=user_id).order_by(Habit.habit_id.asc()).all()
     
-    print(habits)
+    
     return habits
 
 def get_habit_by_habit_id(habit_id):
 
     habit = Habit.query.get(habit_id)
-    print(habit)
     
-
+    
     return habit
 
 def update_habit(habit_id, user_id, habit_name, habit_difficulty, habit_type):
@@ -77,7 +76,7 @@ def delete_habit(habit_id):
     db.session.commit()
 
 def check_habit(habit_id):
-    # habit = get_habit_by_habit_id(habit_id)
+    
     habit = Habit.query.get(habit_id)
 
     habit.is_checked = not habit.is_checked
@@ -97,11 +96,3 @@ def start_day(habit_id):
     
 
   
-
-# def check_if_midnight(habits):
-#    now = datetime.now()
-#    if now == now.replace( hour=0, minute=0):
-       
-#        for habit in habits:
-#             habits.is_checked = False
-#    return now
