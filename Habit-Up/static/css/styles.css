@@ -1,10 +1,15 @@
-/* This is where I will put my css that is not bootstrap */
+/* This is where I will put my css that will override bootstrap */
 
 body {
   background-image: url("../images/purple-leaf.jpg");
   width: 100%;
   color: white;
   font-family: "Roboto", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: white;
 }
 
 ul {
@@ -17,13 +22,26 @@ button {
 .navbar {
   background-color: rgb(42, 77, 107);
   width: 100%;
+  white-space: nowrap;
 }
 
 .wrapper {
   width: 100%;
 }
-.habits-wrapper {
-  /* color: rgb(4, 71, 147); */
-  color: white;
+
+.habit-item {
+  margin: 20px;
+}
+
+.complete-this,
+.delete-this,
+.edit-this,
+.habit-name {
+  margin-right: 10px;
+}
+
+.habit-container {
   background-color: rgb(180, 183, 186, 0.9);
+  padding: 133px;
+  margin-top: 20px;
 }
