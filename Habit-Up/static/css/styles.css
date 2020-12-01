@@ -15,6 +15,7 @@ a {
 ul {
   list-style-type: none;
 }
+
 button {
   background-color: rgb(4, 71, 147);
   color: white;
@@ -44,4 +45,8 @@ button {
   background-color: rgb(180, 183, 186, 0.9);
   padding: 133px;
   margin-top: 20px;
+}
+
+.habit-name {
+  font-size: 27px;
 }

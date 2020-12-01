@@ -10,7 +10,7 @@
    
     <div class="d-flex flex-row mx-auto">
         
-                <h3>Add a habit</h3> 
+                <h3>Add a daily habit</h3> 
         
                 <a href="/add-habit">
                     <button>
@@ -21,16 +21,18 @@
                 </a>
 
     </div>
-    <div class="">
-        <h2 class="text-center mx-auto">Your Habits</h2>
-    </div>
+    <!-- <div class="">
+        <h2 class="text-center mx-auto">Your Daily Habits</h2>
+    </div> -->
                
     <div class="mx-auto text-center">
-        <form action="/start-day" methods="get">    
-            <input type="submit" value="Start a new day!">
+        <form action="/start-day" methods="get"> 
+            <button type="submit">Start a new day!</button>   
+            <!-- <input type="submit" value="Start a new day!"> -->
         </form>
     </div>
     <div class="mx-auto habit-container">
+        <h2 class=text-center>Your Daily Habits!</h2>
         <ul >
             {% for habit in habits %}
             <div class="d-flex">
