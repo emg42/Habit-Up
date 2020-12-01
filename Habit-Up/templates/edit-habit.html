@@ -2,31 +2,45 @@
 {% block body %}
 
 
-  <h1>Edit Habit</h1>
-  <form name="habit-id" action="/edit-habit/{{habit.habit_id}}" method="POST">
-    <label for="habit-name"></label>
-    <input type="text" value="{{ habit.habit_id}}" hidden>
-    <input name="habit-name" type="text" placeholder="{{habit.habit_name}}">
+<nav class="navbar">
+    <h1> Edit Habit</h1>
     
+</nav>
+  <div class="edit-habit-wrapper mx-auto d-flex-column">
+    <form class="justify-content-center d-flex flex-column" name="habit-id" action="/edit-habit/{{habit.habit_id}}" method="POST">
+        <div>
+            
+            <label for="habit-name">Habit Description</label>
+            <input type="text" value="{{ habit.habit_id}}" hidden>
+            <input name="habit-name" type="text" placeholder="{{habit.habit_name}}">
+        </div>
 
-    <label for="difficulty">Habit Difficulty</label>
-    <select name="difficulty" for="difficulty">
-        <option value="easy">Easy</option>
-        <option value="medium">Medium</option>
-        <option value="hard">Hard</option>
-    </select>
+        <div>
+            <label for="difficulty">Habit Difficulty</label>
+            <select name="difficulty" for="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
 
-    <label for="type">Habit Category</label>
-    <select name="type" id="">
-        <option value="work">Work</option>
-        <option value="chores">Chores</option>
-        <option value="school">School</option>
-        <option value="health">Health & Wellness</option>
-        <option value="creativity">Creativity</option>
-        <option value="exercise">Exercise</option>
-    </select>
-    <button type="submit">Update habit</button>
-    </form>
+        <div>
+            <label for="type">Habit Category</label>
+            <select name="type" id="">
+                <option value="work">Work</option>
+                <option value="chores">Chores</option>
+                <option value="school">School</option>
+                <option value="health">Health & Wellness</option>
+                <option value="creativity">Creativity</option>
+                <option value="exercise">Exercise</option>
+            </select>
+        </div>
 
+       <div class="mx-auto mt-0">
+        <button type="submit">Update habit</button>
+       </div>
+        
+        </form>
+</div>
 
 {% endblock %}

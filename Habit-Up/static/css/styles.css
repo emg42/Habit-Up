@@ -41,12 +41,46 @@ button {
   margin-right: 10px;
 }
 
-.habit-container {
-  background-color: rgb(180, 183, 186, 0.9);
+.habit-container,
+.signup-wrapper,
+.login-wrapper,
+.add-habit-wrapper,
+.edit-habit-wrapper {
+  background-color: rgb(142, 143, 145, 0.9);
   padding: 133px;
   margin-top: 20px;
 }
 
 .habit-name {
   font-size: 27px;
+}
+
+.signup-wrapper,
+.homepage-txt-wrapper,
+.login-wrapper,
+.add-habit-wrapper,
+.edit-habit-wrapper {
+  width: 45%;
+  font-size: 27px;
+}
+
+.pre-login-txt,
+.pre-signup-txt {
+  margin-right: 10px;
+}
+
+.fitness-img {
+  z-index: -1;
+  height: 1200px;
+  width: 100%;
+
+  position: fixed;
+}
+.homepage-wrapper {
+  color: black;
+  font-size: 27px;
+  width: 30%;
+  float: right;
+  margin-top: 87px;
+  margin-right: 225px;
 }

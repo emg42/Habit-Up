@@ -3,36 +3,27 @@
 <div class="container wrapper d-flex flex-column">
     <nav class="navbar">
         <h1>Habit Up</h1>
+
         <form id='logout-btn' action="/logout" method='post'>
             <button type="submit">Logout</button>
         </form>
     </nav>
    
-    <div class="d-flex flex-row mx-auto">
-        
-                <h3>Add a daily habit</h3> 
-        
-                <a href="/add-habit">
-                    <button>
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                        </svg>
-                    </button>
-                </a>
 
-    </div>
     <!-- <div class="">
         <h2 class="text-center mx-auto">Your Daily Habits</h2>
     </div> -->
                
-    <div class="mx-auto text-center">
-        <form action="/start-day" methods="get"> 
-            <button type="submit">Start a new day!</button>   
-            <!-- <input type="submit" value="Start a new day!"> -->
-        </form>
-    </div>
+    
     <div class="mx-auto habit-container">
         <h2 class=text-center>Your Daily Habits!</h2>
+        <div class="mx-auto text-center">
+            <form action="/start-day" methods="get"> 
+                <button class="h3" type="submit">Start a new day!</button>   
+                <!-- <input type="submit" value="Start a new day!"> -->
+            </form>
+        </div>
+        
         <ul >
             {% for habit in habits %}
             <div class="d-flex">
@@ -92,6 +83,19 @@
             </div>
             {% endfor %}
         </ul> 
+        <div class="d-flex flex-row mx-auto justify-content-center">
+        
+            <h3>Add a daily habit</h3> 
+    
+            <a href="/add-habit">
+                <button>
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                </button>
+            </a>
+
+</div>
     </div>           
      
     
