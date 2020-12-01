@@ -84,3 +84,9 @@ button {
   margin-top: 87px;
   margin-right: 225px;
 }
+
+.decoration {
+  background-image: url("../images/purple-leaf.jpg");
+  height: 20px;
+  width: 100%;
+}
