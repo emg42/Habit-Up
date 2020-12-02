@@ -19,6 +19,8 @@ ul {
 button {
   background-color: rgb(4, 71, 147);
   color: white;
+  padding: 10px;
+  border-radius: 47px;
 }
 .navbar {
   background-color: rgb(42, 77, 107);
@@ -78,15 +80,20 @@ button {
 }
 .homepage-wrapper {
   color: black;
-  font-size: 27px;
+  font-size: 35px;
   width: 30%;
   float: right;
   margin-top: 87px;
-  margin-right: 225px;
+  margin-right: 325px;
 }
 
 .decoration {
   background-image: url("../images/purple-leaf.jpg");
   height: 20px;
   width: 100%;
+}
+
+.hover {
+  background-color: rgb(174, 117, 170);
+  border: 2px solid rgb(4, 71, 147);
 }
